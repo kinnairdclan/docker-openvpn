@@ -9,18 +9,18 @@ jobs:
       DOCKER_IMAGE: atymchuk/openvpn:latest
 
     steps:
-      #   - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      # - name: Build a x86_64 image
-      #   run: |
-      #     echo "Building image..."
-      #     docker build -t "$DOCKER_IMAGE" .
-      #     docker inspect "$DOCKER_IMAGE"
-      #     docker run --rm "$DOCKER_IMAGE" openvpn --version
-      #     docker run --rm "$DOCKER_IMAGE" openssl version
+      - name: Build a x86_64 image
+        run: |
+          echo "Building image..."
+          docker buildx build -t "$DOCKER_IMAGE" .
+          docker inspect "$DOCKER_IMAGE"
+          docker run --rm "$DOCKER_IMAGE" openvpn --version
+          docker run --rm "$DOCKER_IMAGE" openssl version
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v2
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -28,17 +28,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push to Docker Hub
-        uses: docker/build-push-action@v4
-        with:
-          # push: true
-          tags: ${{ env.DOCKER_IMAGE }}
+      # - name: Build and push to Docker Hub
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     push: true
+      #     tags: ${{ env.DOCKER_IMAGE }}
 
       - name: Print software versions
         run: |
-          # docker inspect "$DOCKER_IMAGE"
+          docker inspect "$DOCKER_IMAGE"
           docker run --rm "$DOCKER_IMAGE" openvpn --version
           docker run --rm "$DOCKER_IMAGE" openssl version
+
+      - name: Push to docker.io
+        run: |
+          echo "Pushing image..."
+          docker push "$DOCKER_IMAGE"
 
       - name: Run tests
         run: |
