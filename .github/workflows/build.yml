@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: atymchuk/openvpn
+      DOCKER_IMAGE: atymchuk/openvpn:latest
 
     steps:
       #   - uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: "$DOCKER_IMAGE:latest"
+          tags: ${{ env.DOCKER_IMAGE }}
 
       - name: Print software versions
         run: |
