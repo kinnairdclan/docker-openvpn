@@ -36,7 +36,7 @@ jobs:
 
       - name: Print software versions
         run: |
-          docker inspect "$DOCKER_IMAGE"
+          # docker inspect "$DOCKER_IMAGE"
           docker run --rm "$DOCKER_IMAGE" openvpn --version
           docker run --rm "$DOCKER_IMAGE" openssl version
 
