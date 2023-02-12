@@ -19,11 +19,6 @@ jobs:
       #     docker run --rm "$DOCKER_IMAGE" openvpn --version
       #     docker run --rm "$DOCKER_IMAGE" openssl version
 
-      - name: Run tests
-        run: |
-          echo "Running tests..."
-          test/run.sh "$DOCKER_IMAGE"
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -44,3 +39,8 @@ jobs:
           docker inspect "$DOCKER_IMAGE"
           docker run --rm "$DOCKER_IMAGE" openvpn --version
           docker run --rm "$DOCKER_IMAGE" openssl version
+
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          ./test/run.sh "$DOCKER_IMAGE"
