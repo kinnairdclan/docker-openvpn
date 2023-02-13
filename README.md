@@ -1,6 +1,6 @@
 # OpenVPN for Docker
 
-[![Build Status](https://travis-ci.org/atymchuk/docker-openvpn.svg)](https://travis-ci.org/atymchuk/docker-openvpn)
+[![Build](https://github.com/atymchuk/docker-openvpn/actions/workflows/build.yml/badge.svg)](https://github.com/atymchuk/docker-openvpn/actions/workflows/build.yml)
 [![Docker Stars](https://img.shields.io/docker/stars/atymchuk/openvpn.svg)](https://hub.docker.com/r/atymchuk/openvpn/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/atymchuk/openvpn.svg)](https://hub.docker.com/r/atymchuk/openvpn/)
 

@@ -6,21 +6,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: atymchuk/openvpn:latest
+      IMAGE: atymchuk/openvpn
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Build a x86_64 image
+      - name: Build images
         run: |
-          echo "Building image..."
-          docker buildx build -t "$DOCKER_IMAGE" .
+          echo "Building images..."
+          docker buildx build --platform linux/amd64 --tag "$IMAGE:amd64" .
+          docker buildx build --platform linux/arm64 --tag "$IMAGE:arm64" ./Dockerfile.aarch64
 
       - name: Print software versions
         run: |
-          docker inspect "$DOCKER_IMAGE"
-          docker run --rm "$DOCKER_IMAGE" openvpn --version
-          docker run --rm "$DOCKER_IMAGE" openssl version
+          docker inspect "$IMAGE:amd64"
+          docker run --rm "$IMAGE:amd64" openvpn --version
+          docker run --rm "$IMAGE:amd64" openssl version
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -31,9 +32,16 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests..."
-          ./test/run.sh "$DOCKER_IMAGE"
+          ./test/run.sh "$IMAGE:amd64"
 
-      - name: Push to docker.io
+      - name: Push images to docker.io
         run: |
-          echo "Pushing image..."
-          docker push "$DOCKER_IMAGE"
+          echo "Pushing images..."
+          docker push "$DOCKER_IMAGE:amd64"
+          docker push "$DOCKER_IMAGE:arm64"
+
+      - name: Create manifest files
+        run: |
+          echo "Pushing manifests..."
+          docker manifest create "$IMAGE:latest" "$IMAGE:amd64" "$IMAGE:arm64"
+          docker manifest push "$IMAGE:latest"
