@@ -15,7 +15,7 @@ jobs:
         run: |
           echo "Building images..."
           docker buildx build --platform linux/amd64 --tag "$IMAGE:amd64" .
-          docker buildx build --platform linux/arm64 --tag "$IMAGE:arm64" ./Dockerfile.aarch64
+          docker buildx build --platform linux/arm64 --tag "$IMAGE:arm64" --file /Dockerfile.aarch64 .
 
       - name: Print software versions
         run: |
