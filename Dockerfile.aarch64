@@ -1,7 +1,7 @@
 # Original credit: https://github.com/kylemanna/docker-openvpn
 
 # Smallest base image
-FROM aarch64/alpine:3.5
+FROM alpine:3.5
 
 LABEL maintainer="Alex Tymchuk <alex@tymchuk.org>"
 
