@@ -1,8 +1,8 @@
 # OpenVPN for Docker
 
-[![Build](https://github.com/atymchuk/docker-openvpn/actions/workflows/build.yml/badge.svg)](https://github.com/atymchuk/docker-openvpn/actions/workflows/build.yml)
-[![Docker Stars](https://img.shields.io/docker/stars/atymchuk/openvpn.svg)](https://hub.docker.com/r/atymchuk/openvpn/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/atymchuk/openvpn.svg)](https://hub.docker.com/r/atymchuk/openvpn/)
+[![Build Status](https://my.bearapps.io/api/badges/kinnairdclan/docker-openvpn/status.svg)](https://my.bearapps.io/kinnairdclan/docker-openvpn)
+[![Docker Stars](https://img.shields.io/docker/stars/kinnairdclan/openvpn.svg)](https://hub.docker.com/r/kinnairdclan/docker-openvpn/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/kinnairdclan/openvpn.svg)](https://hub.docker.com/r/kinnairdclan/docker-openvpn/)
 
 OpenVPN server in a Docker container complete with an EasyRSA PKI CA.
 
